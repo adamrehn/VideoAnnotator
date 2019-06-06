@@ -1,0 +1,61 @@
+body
+{
+	background-color: #eee;
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+h2, p {
+	margin: 0;
+}
+
+.section-new h2 {
+	margin-bottom: 2rem;
+}
+
+.wrapper
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.section
+{
+	background-color: #fff;
+	border-radius: 1rem;
+	padding: 2rem;
+}
+
+.section-open
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+}
+
+.section-new {
+	min-width: 35rem;
+}
+
+.divider {
+	padding: 0 4rem;
+}
+
+.section p:last-child {
+	margin-top: 2rem;
+}
+
+.field-grid .label {
+	font-weight: bold;
+}
+
+.field-grid .input button {
+	margin-left: 0.5rem;
+}

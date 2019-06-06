@@ -1,0 +1,93 @@
+{
+	"name": "VideoAnnotator",
+	"description": "VideoAnnotator",
+	"homepage": "https://github.com/adamrehn/VideoAnnotator",
+	"license": "MIT",
+	"main": "source/js/main.js",
+	"version": "0.0.1",
+	"files": [
+		"source/css",
+		"source/js",
+		"source/pages",
+		"source/thirdparty"
+	],
+	"engines": {
+		"node": ">=8.0.0"
+	},
+	"author": {
+		"name": "Adam Rehn",
+		"email": "adam.rehn@my.jcu.edu.au"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/adamrehn/VideoAnnotator.git"
+	},
+	"dependencies": {
+		"electron-is-dev": "*",
+		"glob": "*",
+		"jquery": "*",
+		"js-yaml": "*",
+		"mkdirp": "*",
+		"moment": "*",
+		"moment-duration-format": "*",
+		"node-mediainfo": "*",
+		"round": "*",
+		"util.promisify": "*"
+	},
+	"devDependencies": {
+		"@types/cheerio": "*",
+		"@types/glob": "*",
+		"@types/jquery": "*",
+		"@types/js-yaml": "*",
+		"@types/mkdirp": "*",
+		"@types/moment-duration-format": "*",
+		"@types/numeral": "*",
+		"devtron": "*",
+		"electron": "*",
+		"electron-builder": "*",
+		"electron-css-reload": "*",
+		"rimraf": "*",
+		"tslint": "*",
+		"typescript": "*"
+	},
+	"build": {
+		"appId": "com.adamrehn.VideoAnnotator",
+		"compression": "maximum",
+		"linux": {
+			"target": [
+				"deb",
+				"dir",
+				"zip"
+			]
+		},
+		"mac": {
+			"category": "public.app-category.utilities",
+			"target": [
+				"dir",
+				"dmg",
+				"pkg",
+				"zip"
+			]
+		},
+		"win": {
+			"target": [
+				"dir",
+				"nsis",
+				"zip"
+			]
+		},
+		"nsis": {
+			"oneClick": false,
+			"perMachine": true,
+			"allowToChangeInstallationDirectory": true
+		}
+	},
+	"scripts": {
+		"build": "tsc",
+		"clean": "rimraf ./dist ./node_modules ./source/js",
+		"dist": "npm run build && build",
+		"pack": "npm run build && build --dir",
+		"postinstall": "electron-builder install-app-deps",
+		"start": "npm run build && electron ."
+	}
+}

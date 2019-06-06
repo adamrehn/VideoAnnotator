@@ -1,0 +1,194 @@
+body {
+	background-color: #555;
+}
+
+#container
+{
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+.video-wrapper
+{
+	position: relative;
+	background-color: #000;
+	
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.video-wrapper video {
+	max-width: 100%;
+}
+
+.video-wrapper .overlay
+{
+	position: absolute;
+	z-index: 999;
+	right: 1rem;
+	top: 1rem;
+	
+	border: 1px solid rgba(200, 200, 200, 0.25);
+	background-color: rgba(25, 25, 25, 0.5);
+	color: rgba(255, 255, 255, 0.9);
+	border-radius: 1rem;
+	padding: 1rem 1.5rem;
+}
+
+.video-wrapper .overlay p
+{
+	text-align: center;
+	margin: 0;
+}
+
+.video-wrapper .overlay .position
+{
+	font-size: 2rem;
+	padding-bottom: 0.5rem;
+}
+
+progress, .indicators
+{
+	width: 100%;
+	min-height: 4rem;
+}
+
+progress {
+	-webkit-appearance: none;
+}
+
+progress::-webkit-progress-bar
+{
+	background-color: #eee;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+	overflow: hidden;
+}
+
+progress::-webkit-progress-value
+{
+	box-sizing: content-box;
+	border-right: 2px solid #000;
+	background-color: transparent;
+	margin-left: -1px;
+}
+
+.timeline {
+	position: relative;
+}
+
+.indicators
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.indicators .segment, .indicators .frame
+{
+	min-height: 2.5rem;
+	position: absolute;
+	top: 0.75rem;
+}
+
+.indicators .segment
+{
+	background-color: rgba(66, 197, 244, 0.5);
+	border: 1px solid rgb(0, 178, 242);
+}
+
+.indicators .frame
+{
+	width: 2px;
+	background-color: rgba(255, 255, 0);
+	margin-left: -1px;
+}
+
+.controls {
+	text-align: center;
+}
+
+.controls .control-wrapper
+{
+	text-align: center;
+	display: inline-block;
+	margin: 1rem 0;
+}
+
+.controls .control-wrapper .control-label
+{
+	color: #fff;
+	padding-bottom: 1rem;
+	margin: 0;
+}
+
+.controls .control-wrapper + .control-wrapper {
+	margin-left: 1rem;
+}
+
+.metadata
+{
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+}
+
+.metadata .segment-wrapper, .metadata .frame-wrapper
+{
+	flex: 1;
+	padding: 1rem;
+}
+
+.metadata .segment-wrapper {
+	padding-right: 0.5rem;
+}
+
+.metadata .frame-wrapper {
+	padding-left: 0.5rem;
+}
+
+.metadata .segment, .metadata .frame
+{
+	background-color: #fff;
+	border-radius: 0.5rem;
+	padding: 1.5rem;
+	height: 100%;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;
+}
+
+.metadata .heading
+{
+	font-weight: bold;
+	margin-bottom: 1.5rem;
+}
+
+.metadata .field-grid {
+	grid-template-columns: 1fr 1fr;
+}
+
+.metadata .delete {
+	margin-top: 1.5rem;
+}
+
+.control-wrapper button
+{
+	border: 1px solid #777;
+	background-color: #eee;
+	font-size: 2rem;
+	min-width: 5rem;
+	min-height: 4rem;
+}
+
+.control-wrapper button:enabled:hover {
+	background-color: #fafafa;
+}
+
+input:invalid {
+	border: 1px solid red;
+}

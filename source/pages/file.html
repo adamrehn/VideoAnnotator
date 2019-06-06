@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		
+		<link href="../thirdparty/css/fontawesome.min.css" rel="stylesheet" type="text/css">
+		<link href="../css/common.css" rel="stylesheet" type="text/css">
+		<link href="../css/file.css" rel="stylesheet" type="text/css">
+		
+		<script type="text/javascript">
+			require('../js/pages/common.js').common();
+			require('../js/pages/file.js').main();
+		</script>
+	</head>
+	<body class="file">
+		<div class="wrapper">
+			
+			<div class="section section-open">
+				<h2>Open an existing dataset</h2>
+				<p><button id="open">Open Dataset</button></p>
+			</div>
+			
+			<div class="divider">
+				<h2>OR</h2>
+			</div>
+			
+			<div class="section section-new">
+				<h2>Create a new dataset</h2>
+				
+				<div class="field-grid">
+					
+					<span class="label">Video file:</span>
+					<span class="input">
+						<input type="hidden" id="video" required>
+						<span id="video-label"><em>No file selected.</em></span>
+						<button id="choose-video">Browse</button>
+					</span>
+					
+					<span class="label">Metadata schema:</span>
+					<span class="input">
+						<input type="hidden" id="schema" required>
+						<span id="schema-label"><em>No file selected.</em></span>
+						<button id="choose-schema">Browse</button>
+					</span>
+					
+				</div>
+				
+				<p><button id="new">Create Dataset</button></p>
+			</div>
+			
+		</div>
+	</body>
+</html>
