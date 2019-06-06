@@ -15,6 +15,8 @@ Features:
 ## Contents
 
 - [Using VideoAnnotator](#using-videoannotator)
+  - [Creating schema files](#creating-schema-files)
+  - [Annotating videos](#annotating-videos)
 - [Building VideoAnnotator from source](#building-videoannotator-from-source)
   - [Requirements](#requirements)
   - [Build process](#build-process)
@@ -23,7 +25,7 @@ Features:
 
 ## Using VideoAnnotator
 
-**Creating a schema file:**
+### Creating schema files
 
 All datasets in VideoAnnotator must be accompanied by an information schema that defines the metadata fields for the dataset. Schema files can be written in either JSON or YAML and must adhere to the following structure:
 
@@ -61,7 +63,7 @@ fields:
 
 Once you have created a schema file then this can be used when creating a new dataset in VideoAnnotator.
 
-**Annotating a video:**
+### Annotating videos
 
 When you first open VideoAnnotator you will be presented with a screen providing options to load an existing dataset from file or create a new dataset. Creating a new dataset requires that you specify a video file and an accompanying schema file.
 
