@@ -89,6 +89,8 @@ The workflow for annotating a video commonly involves the following steps:
 
 Once you have finished annotating a video then you can save the dataset by clicking the "Save the dataset" button and specifying an output filename. VideoAnnotator datasets are stored in JSON format for easy ingestion by data processing and transformation pipelines. If you would like to annotate another video then you can click the "Close the dataset" button to return to the dataset selection screen.
 
+**An important note about file linkages:** JSON dataset files store references to their corresponding schema and video files as **relative paths**, which means moving a JSON file or its corresponding schema or video file in a manner that alters their relative filesystem positions will break the linkage. For maximum portability, the simplest option is to simply store these files in the same directory, which can then be moved freely without breaking the linkages between the files it contains. If you are storing the files in separate directories then it is strongly recommended that you establish a filesystem layout convention for any given project and adhere to it, so that the root project directory can be copied or moved without breaking any linkages.
+
 
 ## Building VideoAnnotator from source
 
