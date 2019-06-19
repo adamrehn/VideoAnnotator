@@ -4,7 +4,7 @@
 	"homepage": "https://github.com/adamrehn/VideoAnnotator",
 	"license": "MIT",
 	"main": "source/js/main.js",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"files": [
 		"source/css",
 		"source/js",
