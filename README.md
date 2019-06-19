@@ -75,7 +75,7 @@ The window is laid out as follows:
 
 - The video itself is at the top of the window, with an overlay in the top-right indicating the current playback position and frame number.
 - The timeline is displayed immediately below the video, which includes a vertical line indicating the current playback position and indicators for any annotated segments and frames in the dataset.
-- A row of controls are displayed below the timeline, including a save button, playback controls, and annotation controls for defining segments and marking individual frames for annotation.
+- A row of controls are displayed below the timeline, including a save button, a close button, playback controls, and annotation controls for defining segments and marking individual frames for annotation.
 - Two boxes are displayed at the bottom of the window. The box on the left displays the metadata input controls for the currently selected segment (if any) and the box on the right displays the metadata input controls for the currently selected frame (if any.)
 
 The workflow for annotating a video commonly involves the following steps:
@@ -87,7 +87,7 @@ The workflow for annotating a video commonly involves the following steps:
 5. Use the frame metadata input controls to set the metadata values for the current frame.
 6. Repeat as necessary for additional frames or segments.
 
-Once you have finished annotating a video then you can save the dataset by clicking the "Save the dataset" button and specifying an output filename. VideoAnnotator datasets are stored in JSON format for easy ingestion by data processing and transformation pipelines.
+Once you have finished annotating a video then you can save the dataset by clicking the "Save the dataset" button and specifying an output filename. VideoAnnotator datasets are stored in JSON format for easy ingestion by data processing and transformation pipelines. If you would like to annotate another video then you can click the "Close the dataset" button to return to the dataset selection screen.
 
 
 ## Building VideoAnnotator from source
