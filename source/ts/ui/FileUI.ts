@@ -42,7 +42,7 @@ export class FileUI
 	private sendDetails(details : any)
 	{
 		//Send the dataset details to the annotation screen
-		electron.ipcRenderer.send('dataset-details', details);
+		electron.ipcRenderer.send('show-dataset', details);
 		
 		//Close this browser window
 		electron.remote.getCurrentWindow().close();

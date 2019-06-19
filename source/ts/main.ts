@@ -6,6 +6,24 @@ import * as path from 'path';
 let fileWindow : Electron.BrowserWindow | null;
 let annotationWindow : Electron.BrowserWindow | null;
 
+//Creates and shows the file browser window
+function createFileWindow()
+{
+	//Create the file browser window
+	fileWindow = ElectronUtils.createAndShow('file://' + path.dirname(__dirname) + '/pages/file.html', {
+		'width':     1280,
+		'height':    480,
+		'minWidth':  1280,
+		'minHeight': 480,
+		'resizable': false
+	});
+	
+	//Make sure we release our reference to the file window when it is closed
+	fileWindow.on('closed', () => {
+		fileWindow = null;
+	});
+}
+
 //Quit when all browser windows are closed
 app.on('window-all-closed', () => {
 	app.quit();
@@ -15,7 +33,7 @@ app.on('window-all-closed', () => {
 app.on('ready', () =>
 {
 	//Create the annotation browser window when we receive data from the file window
-	ipcMain.once('dataset-details', (event : any, details : any) =>
+	ipcMain.on('show-dataset', (event : any, details : any) =>
 	{
 		//Create the annotation browser window
 		annotationWindow = ElectronUtils.createAndShow('file://' + path.dirname(__dirname) + '/pages/annotation.html', {
@@ -36,17 +54,11 @@ app.on('ready', () =>
 		});
 	});
 	
-	//Create the file browser window
-	fileWindow = ElectronUtils.createAndShow('file://' + path.dirname(__dirname) + '/pages/file.html', {
-		'width':     1280,
-		'height':    480,
-		'minWidth':  1280,
-		'minHeight': 480,
-		'resizable': false
+	//Reopen the file browser window when we receive a request to do so from the annotation browser window
+	ipcMain.on('close-dataset', (event : any, details : any) => {
+		createFileWindow();
 	});
 	
-	//Make sure we release our reference to the file window when it is closed
-	fileWindow.on('closed', () => {
-		fileWindow = null;
-	});
+	//Create the initial file browser window
+	createFileWindow();
 });

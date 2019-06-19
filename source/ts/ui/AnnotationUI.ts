@@ -33,6 +33,7 @@ export class AnnotationUI
 	//Our dataset controls
 	private datasetControls : JQuery<HTMLDivElement>;
 	private saveButton : JQuery<HTMLButtonElement>;
+	private closeButton : JQuery<HTMLButtonElement>;
 	
 	//Our playback controls
 	private playbackControls : JQuery<HTMLDivElement>;
@@ -112,7 +113,8 @@ export class AnnotationUI
 		let datasetControlsLabel = $(document.createElement('p')).addClass('control-label').text('Dataset');
 		this.datasetControls = $(document.createElement('div')).addClass('dataset-controls');
 		this.saveButton = this.createButton('save', 'Save the dataset');
-		this.datasetControls.append(this.saveButton);
+		this.closeButton = this.createButton('times-circle', 'Close the dataset');
+		this.datasetControls.append(this.saveButton, this.closeButton);
 		datasetControlsWrapper.append(datasetControlsLabel, this.datasetControls);
 		this.controls.append(datasetControlsWrapper);
 		
@@ -276,6 +278,45 @@ export class AnnotationUI
 		
 		//Return the raw value for all other element types
 		return input.val();
+	}
+	
+	//Handles a window close request
+	private handleWindowClose(reopenFileWindow : boolean)
+	{
+		//Determine if we have unsaved changes
+		if (this.haveUnsavedChanges === true)
+		{
+			//Prompt the user to confirm the close
+			DialogProvider.showConfirmDialog('You have unsaved changes that will be lost if you close the application.\n\nAre you sure you want to continue?', 'Close and discard changes')
+			.then(() =>
+			{
+				//User opted to permit the close operation
+				this.closeWindow(reopenFileWindow);
+			})
+			.catch(() => {
+				//User opted to cancel the close operation
+			});
+		}
+		else
+		{
+			//No unsaved changes, so permit the close operation
+			this.closeWindow(reopenFileWindow);
+		}
+	}
+	
+	//Closes the window, optionally reopening the file browser window
+	private closeWindow(reopenFileWindow : boolean)
+	{
+		//Remove our `onbeforeunload` event handler
+		window.onbeforeunload = (e) => {};
+		
+		//Reopen the file browser window if requested
+		if (reopenFileWindow === true) {
+			electron.ipcRenderer.send('close-dataset');
+		}
+		
+		//Close this browser window
+		electron.remote.getCurrentWindow().close();
 	}
 	
 	//Updates the window title to reflect the current application state
@@ -566,25 +607,14 @@ export class AnnotationUI
 		//Wire up the window close event
 		window.onbeforeunload = (e) =>
 		{
-			//Determine if we have unsaved changes
-			if (this.haveUnsavedChanges === true)
-			{
-				//Prevent the default close operation
-				e.preventDefault();
-				e.returnValue = false;
-				
-				//Prompt the user to confirm the close
-				DialogProvider.showConfirmDialog('You have unsaved changes that will be lost if you close the application.\n\nAre you sure you want to continue?', 'Close and discard changes')
-				.then(() =>
-				{
-					//User opted to permit the close operation
-					this.haveUnsavedChanges = false;
-					electron.remote.getCurrentWindow().close();
-				})
-				.catch(() => {
-					//User opted to cancel the close operation
-				});
-			}
+			//Prevent the default close operation
+			e.preventDefault();
+			e.returnValue = false;
+			
+			//Invoke our close handler once this event handler has completed
+			window.requestAnimationFrame(() => {
+				this.handleWindowClose(false);
+			});
 		};
 		
 		//Wire up resize events and trigger an initial resize
@@ -624,6 +654,11 @@ export class AnnotationUI
 					ErrorHandler.handleError(err);
 				});
 			}
+		});
+		
+		//Wire up the close button
+		this.closeButton.click(() => {
+			this.handleWindowClose(true);
 		});
 		
 		//Set the maximum value for our progress bar once we know the video duration
